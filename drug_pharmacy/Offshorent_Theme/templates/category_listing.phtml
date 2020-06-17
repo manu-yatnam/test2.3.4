@@ -1,0 +1,33 @@
+<?php 
+/**
+ * @author Offshorent Team
+ * @copyright Copyright (c) 2017 Offshorent 
+ * @package Offshorent_Theme
+ */
+ ?>
+<?php
+$catId =13;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($catId);           
+$subcats = $subcategory->getChildrenCategories();
+?>
+<ul >
+    <?php
+    foreach ($subcats as $subcat) {
+        if ($subcat->getIsActive()) {
+
+            $subcat_url = $subcat->getUrl();
+            $subcat_img = "";
+            ?>
+            <li>
+                <a href="<?php echo $subcat_url; ?>">
+                    <?php echo $subcat->getName(); ?>
+                </a>
+            </li>
+
+            <?php
+        }
+    }
+    ?>
+</ul>
+
